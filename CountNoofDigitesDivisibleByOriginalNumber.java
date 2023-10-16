@@ -8,7 +8,7 @@ public class CountNoofDigitesDivisibleByOriginalNumber
         while(n>0)
         {
             int x = n%10;
-            if((number % x) == 0)
+            if(x!= 0 && (number % x) == 0)
             {
                 System.out.println("Your Given Number = "+number+" ,digits = "+x);
         	    counter++;
