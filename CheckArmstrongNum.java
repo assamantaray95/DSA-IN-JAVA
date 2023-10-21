@@ -1,35 +1,41 @@
 import java.util.Scanner;
 public class CheckArmstrongNum{
     public static void checkNum(int num){
-       int number = num;
+       int originalNum = num;
        int countDigits = 0; 
-       while(number > 0){
-          int digit = number % 10;
+       while(num > 0){
+          int digit = num % 10;
           countDigits++;
-          number = number / 10;
+          num = num / 10;
        }
         System.out.println("Power Of the Number = "+countDigits);
-       
-        if(checkArmstrong(number , countDigits) == true){
-            System.out.println("Success");
-        }else{
-            System.out.println("Not success");
+        Boolean check = checkArmstrong(originalNum , countDigits);
+        if(check == true){
+           System.out.println("Sum of All Digits Power "+countDigits+" = "+originalNum); 
+           System.out.println("Hence "+originalNum+" is a Armstrong Number");
         }
-        
+        else
+        {
+            System.out.println("Sum of All Digits Power "+countDigits+" !=(Not Equal To) "+originalNum); 
+            System.out.println("Hence "+originalNum+" is not a Armstrong number");
+        }
     }
     
-    public static boolean checkArmstrong(int digit, int power){
+    public static boolean checkArmstrong(int originalNum, int power){
         int sum = 0;
-        int compare = digit;
-        while(digit > 0){
-            int num = digit % 10;
+        int compare = originalNum;
+        while(originalNum > 0){
+            int num = originalNum % 10;
             sum += Math.pow(num , power);
-            digit = digit / 10;
+            originalNum = originalNum / 10;
         }
         if(compare == sum){
-           return true;
+            return true;
         }
-        return false;
+        else 
+        {
+          return false;
+        }
     }
     
     public static void main(String[] args){
