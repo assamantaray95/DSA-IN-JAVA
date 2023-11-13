@@ -1,31 +1,31 @@
 public class MaximumWaterTrap
 {
     static int rainWater(int[] arr){
-        int start, end, n;
-        int maxWaterHeight = 0;
-        int waterCount = 0;
-        n = arr.length;
-        start = arr[0];
-        end = arr[n-1];
-        if(start < end){
-            maxWaterHeight = start; 
+	int n = arr.length;
+        if(n <= 2){
+           return 0; 
         }
-        else{
-            maxWaterHeight = end;
+        int left = 0, right = n-1;
+        int leftMax = 0, rightMax = 0;
+        int waterTrapped = 0;
+        while(left < right){
+            if(arr[left] < arr[right]){
+                leftMax = Math.max(leftMax , arr[left]);
+                waterTrapped += Math.max(0 , leftMax-arr[left]);
+                left++;
+            } else {
+                rightMax = Math.max(rightMax , arr[right]);
+                waterTrapped  += Math.max(0 , rightMax-arr[right]);
+                right--;
+            }
         }
-        for(int i = 1; i < n-1; i++){
-            if(arr[i] < maxWaterHeight){
-              int value = maxWaterHeight - arr[i];
-               waterCount += value;
-            } 
-        }
-            
-        return  waterCount;
+        return waterTrapped;
     }
 	public static void main(String[] args) {
 	   // int[] arr = { 3, 5, 0, 2 , 0, 4 }; //ans 7
 	   // int[] arr = { 6, 9, 9 }; //ans 0
 	   // int[] arr = { 7, 4, 0, 9 }; //ans 10
+		int[] arr = { 8, 8, 2, 4, 5, 5, 1}; //ans 4
  		System.out.println("Total Rain Water Trapped = "+rainWater(arr));
 	}
 }
