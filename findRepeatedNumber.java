@@ -1,32 +1,38 @@
 import java.util.*;
-public class Main {
-    static int[] findRepeatedNumber(int[] arr) {
-        HashSet<Integer> uniqueNumbers = new HashSet<>();
-        int[] ar = new int[2]; 
+
+public class RepeatAndMissingNum {
+    static int[] findRepeatMissingNum(int[] arr) {
+        HashSet<Integer> uno = new HashSet<>();
+        int[] ans = new int[2];
         int n = arr.length;
-        int sum = n*(n+1)/2;
-        int newSum = 0; 
-        int repeatNum = 0;
+        int apSum = n*(n+1)/2;
+        int repNum = 0;
         for (int num : arr) {
-            uniqueNumbers.add(num);
-            if (!uniqueNumbers.add(num)) {
-                repeatNum =  num;
+            if(!(uno.add(num)))
+            {
+                repNum = num;
             }
+            uno.add(num);
         }
-        for(int hash : uniqueNumbers){
-            newSum += hash; 
+        List<Integer> list = new ArrayList<>(uno);
+        int[] resultArray = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            resultArray[i] = list.get(i);
         }
-        int missingNum  = sum - newSum;
-        ar[0] = missingNum;
-        ar[1] = repeatNum;
-        return ar;
+        int arrSum = Arrays.stream(resultArray).sum();
+        int missingNum = apSum - arrSum;
+        ans[0] = missingNum;
+        ans[1] = repNum;
+        return ans;
     }
+
     public static void main(String[] args) {
-        int[] numbers = {1, 2, 6, 4, 5, 2};
-        int[] repeatedNumber = findRepeatedNumber(numbers);
-        for(int value : repeatedNumber){
-            System.out.print(" " + value + " ");
+        // int[] arr = { 1, 3, 4, 5, 6, 7, 6, 8, 9 };
+        int[] arr = {1, 2, 3, 3, 4, 5};
+        int[] resultArray = findRepeatMissingNum(arr);
+
+        for (int a : resultArray) {
+            System.out.println(a + " ");
         }
-        
     }
 }
