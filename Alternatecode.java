@@ -1,33 +1,37 @@
-import java.util.*;
-
-public class RepeatAndMissingNum {
-    static int[] findRepeatMissingNum(int[] arr) {
-        HashSet<Integer> seenSet = new HashSet<>();
-        int[] ans = new int[2];
+public class RepeatAnsMissingAP
+{
+    static int[] findRepeatAndMissingNum(int[] arr){
+        int[] ar = new int[2];
         int n = arr.length;
-        int apSum = n * (n + 1) / 2;
-        int arrSum = 0;
-        int repNum = 0;
-
-        for (int num : arr) {
-            if (!seenSet.add(num)) {
-                repNum = num;
+        for(int i = 0; i < n; i++)
+        {
+            int index = Math.abs(arr[i]) - 1;
+            if(arr[index] < 0)
+            {
+                ar[0] = Math.abs(arr[i]);
             }
-            arrSum += num;
+            else
+            {
+                arr[index] = -arr[index];
+            }
         }
-        int missingNum = apSum - arrSum + repNum;
-        ans[0] = missingNum;
-        ans[1] = arrSum;
-        return ans;
-    }
-
-    public static void main(String[] args) {
-        // int[] arr = { 1, 3, 4, 5, 6, 7, 6, 8, 9 };
-        int[] arr = {1, 2, 3, 3, 4, 5};
-        int[] resultArray = findRepeatMissingNum(arr);
-
-        for (int a : resultArray) {
-            System.out.println(a + " ");
+        
+        for(int i = 0; i < n; i++)
+        {
+            if(arr[i] > 0)
+            {
+                ar[1] = i+1;
+                break;
+            }
         }
+        return ar;
     }
+	public static void main(String[] args) {
+	    int[] arr = { 1, 3, 3, 4};
+	    int[] opt = findRepeatAndMissingNum(arr);
+	    for(int a : opt){
+		    System.out.println(a+"  ");
+	    }
+	}
 }
+
